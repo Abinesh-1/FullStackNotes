@@ -1,0 +1,11 @@
+# Python / Django
+NotesApp/venv/
+NotesApp/__pycache__/
+*.pyc
+NotesApp/db.sqlite3
+NotesApp/.env
+
+# Node / React
+notesappreact/node_modules/
+notesappreact/dist/
+notesappreact/build/
