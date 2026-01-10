@@ -46,7 +46,7 @@ const filteredNotes =
 
   useEffect(() => {
   setIsLoading(true)
-   axios.get("${API_URL}/notes/")
+   axios.get(`${API_URL}/notes/`) 
    .then((res) => {
     console.log(res.data)
     setNotes(res.data)
@@ -58,7 +58,7 @@ const filteredNotes =
   },[])
 
   const addNote = (data) => {
-     axios.post("${API_URL}/notes/",data)
+     axios.post(`${API_URL}/notes/`,data)
      .then((res) => {
       setNotes([...notes,res.data])
       toast.success("New Note has been added successfully")
