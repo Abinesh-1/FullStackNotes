@@ -35,7 +35,7 @@ const filteredNotes =
 
       useEffect(() => {
         if(searchText.length < 3) return;
-        axios.get(`http://127.0.0.1:8000/notes-search/?search=${searchText}`)
+        axios.get(`${API_URL}/notes-search/?search=${searchText}`)
         .then((res) => {
           setNotes(res.data)
         })
@@ -46,7 +46,7 @@ const filteredNotes =
 
   useEffect(() => {
   setIsLoading(true)
-   axios.get("http://127.0.0.1:8000/notes/")
+   axios.get("${API_URL}/notes/")
    .then((res) => {
     console.log(res.data)
     setNotes(res.data)
@@ -58,7 +58,7 @@ const filteredNotes =
   },[])
 
   const addNote = (data) => {
-     axios.post("http://127.0.0.1:8000/notes/",data)
+     axios.post("${API_URL}/notes/",data)
      .then((res) => {
       setNotes([...notes,res.data])
       toast.success("New Note has been added successfully")
@@ -70,7 +70,7 @@ const filteredNotes =
   }
 
 const updateNote = (data, slug) => {
-  return axios.put(`http://127.0.0.1:8000/notes/${slug}/`, data)
+  return axios.put(`${API_URL}/notes/${slug}/`, data)
     .then((res) => {
       setNotes((prevNotes) =>
         prevNotes.map((note) =>
@@ -88,7 +88,7 @@ const updateNote = (data, slug) => {
 
 
  const deleteNote = (slug) => {
-  axios.delete(`http://127.0.0.1:8000/notes/${slug}/`)
+  axios.delete(`${API_URL}/notes/${slug}/`)
     .then(() => {
       setNotes((prevNotes) => prevNotes.filter((note) => note.slug !== slug));
       toast.success("Note deleted successfully");

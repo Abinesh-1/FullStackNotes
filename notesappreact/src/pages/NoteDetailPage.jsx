@@ -19,7 +19,7 @@
 //   const {slug} = useParams()
 
 //   useEffect(() => {
-//     axios.get(`http://127.0.0.1:8000/notes/${slug}`)
+//     axios.get(`${API_URL}/notes/${slug}`)
 //     .then((res) => {
 //       setNote(res.data)
 //       console.log(res.data)
@@ -76,6 +76,8 @@ import { FiEdit } from "react-icons/fi";
 import axios from "axios";
 import { FormatDate } from "../components/FormatDate";
 import Modal from "../components/Modal";
+import API_URL from '../config'; 
+
 function NoteDetailPage({ deleteNote }) {
   const [isOpen, setIsOpen] = useState(false);
   const [note, setNote] = useState({});
@@ -85,7 +87,7 @@ function NoteDetailPage({ deleteNote }) {
 
   useEffect(() => {
     axios
-      .get(`http://127.0.0.1:8000/notes/${slug}`)
+      .get(`${API_URL}/notes/${slug}`)
       .then((res) => setNote(res.data))
       .catch((err) => console.log(err.message));
   }, [slug]);
