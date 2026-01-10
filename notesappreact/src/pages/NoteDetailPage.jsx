@@ -74,9 +74,8 @@ import { Link, useParams } from "react-router-dom";
 import { BiSolidTrashAlt } from "react-icons/bi";
 import { FiEdit } from "react-icons/fi";
 import axios from "axios";
-import { FormatDate } from "../components/formatDate";
+import { FormatDate } from "../components/FormatDate";
 import Modal from "../components/Modal";
-
 function NoteDetailPage({ deleteNote }) {
   const [isOpen, setIsOpen] = useState(false);
   const [note, setNote] = useState({});
