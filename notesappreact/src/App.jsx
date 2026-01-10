@@ -7,7 +7,7 @@ import NoteDetailPage from "./pages/NoteDetailPage";
 import EditNotePage from "./pages/EditNotePage";
 import axios from "axios";
 import { toast } from 'react-toastify';
-
+import API_URL from './config';
 
 function App(){
   const [notes,setNotes] = useState([]);
