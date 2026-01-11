@@ -1,64 +1,56 @@
 // import React, { useState } from "react";
 // import { useNavigate } from "react-router-dom";
 
-// function AddNotes({addNote}){
+// function AddNotes({ addNote }) {
+//   const [title, setTitle] = useState("");
+//   const [body, setBody] = useState("");
+//   const [category, setCategory] = useState("");
 
-//   const [title,setTitle] = useState("");
-//   const [body,setBody] = useState("");
-//   const [category,setCategory] = useState("");
-
-//   const navigate = useNavigate()
+//   const navigate = useNavigate();
 
 //   const newNote = {
-//     title : title,
-//     body : body,
-//     category : category 
-//     }
+//     title: title,
+//     body: body,
+//     category: category,
+//   };
 
 //   const handleSubmit = (e) => {
-//     e.preventDefault()
-//     if(!title && !body && !category ) {
-//       return;
-//     }
-//     addNote(newNote)
-//     navigate("/")
-//     console.log(newNote)
-//   }
+//     e.preventDefault();
+//     if (!title || !body || !category) return;
+
+//     addNote(newNote);
+//     navigate("/");
+//     console.log(newNote);
+//   };
 
 //   return (
-//     <form onSubmit={handleSubmit} className="max-w-2xl mx-auto bg-white p-6 rounded-lg shadow-md mt-10">
-//       <h5 className="text-xl font-semibold mb-6">Add New Note</h5>
+//     <form
+//       onSubmit={handleSubmit}
+//       className="max-w-2xl mx-auto mt-12 p-8 bg-white rounded-xl shadow-lg"
+//     >
+//       <h2 className="text-2xl font-bold text-gray-800 mb-6 text-center">
+//         Add New Note
+//       </h2>
 
 //       {/* Title */}
-//       <div className="mb-4">
-//         <label
-//           htmlFor="exampleFormControlInput1"
-//           className="block text-gray-700 font-medium mb-2"
-//         >
-//           Title
-//         </label>
+//       <div className="mb-5">
+//         <label className="block text-gray-700 font-semibold mb-2">Title</label>
 //         <input
-//           id="exampleFormControlInput1"
+//           type="text"
 //           placeholder="Enter note's title"
-//           className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-blue-400"
+//           className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition"
 //           value={title}
 //           onChange={(e) => setTitle(e.target.value)}
 //         />
 //       </div>
 
 //       {/* Content */}
-//       <div className="mb-4">
-//         <label
-//           htmlFor="exampleFormControlTextarea1"
-//           className="block text-gray-700 font-medium mb-2"
-//         >
-//           Content
-//         </label>
+//       <div className="mb-5">
+//         <label className="block text-gray-700 font-semibold mb-2">Content</label>
 //         <textarea
-//           id="exampleFormControlTextarea1"
-//           rows={4}
+//           rows={5}
 //           placeholder="Enter note's content"
-//           className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-blue-400"
+//           className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition"
 //           value={body}
 //           onChange={(e) => setBody(e.target.value)}
 //         ></textarea>
@@ -66,15 +58,9 @@
 
 //       {/* Category */}
 //       <div className="mb-6">
-//         <label
-//           htmlFor="categorySelect"
-//           className="block text-gray-700 font-medium mb-2"
-//         >
-//           Note's category
-//         </label>
+//         <label className="block text-gray-700 font-semibold mb-2">Category</label>
 //         <select
-//           id="categorySelect"
-//           className="w-full h-10 px-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-blue-400"
+//           className="w-full h-12 px-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition"
 //           value={category}
 //           onChange={(e) => setCategory(e.target.value)}
 //         >
@@ -88,17 +74,16 @@
 //       {/* Submit */}
 //       <button
 //         type="submit"
-//         className="w-full bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 rounded-md transition"
+//         className="w-full py-3 bg-gradient-to-r from-blue-500 to-indigo-500 text-white font-semibold rounded-lg hover:from-blue-600 hover:to-indigo-600 transition"
 //       >
 //         Add Note
 //       </button>
 //     </form>
 //   );
-// };
+// }
 
 // export default AddNotes;
 
-// ---------- 
 
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
@@ -110,77 +95,76 @@ function AddNotes({ addNote }) {
 
   const navigate = useNavigate();
 
-  const newNote = {
-    title: title,
-    body: body,
-    category: category,
-  };
-
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (!title || !body || !category) return;
+    if (!title || !body || !category) {
+      alert("Please fill all fields");
+      return;
+    }
 
-    addNote(newNote);
+    addNote({ title, body, category });
     navigate("/");
-    console.log(newNote);
   };
 
   return (
-    <form
-      onSubmit={handleSubmit}
-      className="max-w-2xl mx-auto mt-12 p-8 bg-white rounded-xl shadow-lg"
-    >
-      <h2 className="text-2xl font-bold text-gray-800 mb-6 text-center">
-        Add New Note
-      </h2>
+    <div className="max-w-3xl mx-auto px-4 py-8">
+      <h2 className="text-2xl font-bold text-gray-800 mb-6">Create New Note</h2>
+      
+      <form onSubmit={handleSubmit} className="bg-white border rounded-lg p-6 shadow-sm">
+        
+        <div className="mb-4">
+          <label className="block text-gray-700 font-medium mb-2">Title</label>
+          <input
+            type="text"
+            placeholder="Note title"
+            className="w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:border-blue-500"
+            value={title}
+            onChange={(e) => setTitle(e.target.value)}
+          />
+        </div>
 
-      {/* Title */}
-      <div className="mb-5">
-        <label className="block text-gray-700 font-semibold mb-2">Title</label>
-        <input
-          type="text"
-          placeholder="Enter note's title"
-          className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition"
-          value={title}
-          onChange={(e) => setTitle(e.target.value)}
-        />
-      </div>
+        <div className="mb-4">
+          <label className="block text-gray-700 font-medium mb-2">Category</label>
+          <select
+            className="w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:border-blue-500"
+            value={category}
+            onChange={(e) => setCategory(e.target.value)}
+          >
+            <option value="">Select category</option>
+            <option value="BUSINESS">Business</option>
+            <option value="PERSONAL">Personal</option>
+            <option value="IMPORTANT">Important</option>
+          </select>
+        </div>
 
-      {/* Content */}
-      <div className="mb-5">
-        <label className="block text-gray-700 font-semibold mb-2">Content</label>
-        <textarea
-          rows={5}
-          placeholder="Enter note's content"
-          className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition"
-          value={body}
-          onChange={(e) => setBody(e.target.value)}
-        ></textarea>
-      </div>
+        <div className="mb-5">
+          <label className="block text-gray-700 font-medium mb-2">Content</label>
+          <textarea
+            rows={6}
+            placeholder="Write your note here..."
+            className="w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:border-blue-500"
+            value={body}
+            onChange={(e) => setBody(e.target.value)}
+          ></textarea>
+        </div>
 
-      {/* Category */}
-      <div className="mb-6">
-        <label className="block text-gray-700 font-semibold mb-2">Category</label>
-        <select
-          className="w-full h-12 px-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition"
-          value={category}
-          onChange={(e) => setCategory(e.target.value)}
-        >
-          <option value="">Pick a category</option>
-          <option value="BUSINESS">Business</option>
-          <option value="PERSONAL">Personal</option>
-          <option value="IMPORTANT">Important</option>
-        </select>
-      </div>
-
-      {/* Submit */}
-      <button
-        type="submit"
-        className="w-full py-3 bg-gradient-to-r from-blue-500 to-indigo-500 text-white font-semibold rounded-lg hover:from-blue-600 hover:to-indigo-600 transition"
-      >
-        Add Note
-      </button>
-    </form>
+        <div className="flex gap-3">
+          <button
+            type="button"
+            onClick={() => navigate("/")}
+            className="px-4 py-2 border border-gray-300 rounded text-gray-700 hover:bg-gray-50"
+          >
+            Cancel
+          </button>
+          <button
+            type="submit"
+            className="px-6 py-2 bg-blue-600 text-white rounded hover:bg-blue-700"
+          >
+            Save Note
+          </button>
+        </div>
+      </form>
+    </div>
   );
 }
 
