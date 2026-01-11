@@ -69,17 +69,25 @@
 // export default Navbar;
 
 
-import React from "react"; 
+iimport React from "react"; 
 import { Link } from "react-router-dom";
 import { FaSquarePlus } from "react-icons/fa6";
 
 function Navbar({ searchText, handleSearchText }) {
+  const handleLogoClick = () => {
+    handleSearchText("");  // Reset search when clicking logo
+  };
+
   return (
     <nav className="bg-blue-600 shadow">
       <div className="max-w-7xl mx-auto px-4">
         <div className="flex items-center justify-between h-14">
           
-          <Link to="/" className="text-white text-xl font-bold">
+          <Link 
+            to="/" 
+            onClick={handleLogoClick}
+            className="text-white text-xl font-bold"
+          >
             MyNotes
           </Link>
 
