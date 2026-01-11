@@ -144,9 +144,27 @@ function App() {
     return note.category === filterText;
   });
 
+  // Load all notes function
+  const loadAllNotes = () => {
+    setIsLoading(true);
+    axios.get(`${API_URL}/notes/`) 
+      .then((res) => {
+        setNotes(res.data);
+        setIsLoading(false);
+      })
+      .catch((err) => {
+        console.log(err.message);
+        setIsLoading(false);
+      });
+  };
+
   // Search functionality
   useEffect(() => {
-    if (searchText.length < 3) return;
+    if (searchText.length < 3) {
+      // If search is cleared, reload all notes
+      loadAllNotes();
+      return;
+    }
     
     axios.get(`${API_URL}/notes-search/?search=${searchText}`)
       .then((res) => {
@@ -159,16 +177,7 @@ function App() {
 
   // Load all notes on mount
   useEffect(() => {
-    setIsLoading(true);
-    axios.get(`${API_URL}/notes/`) 
-      .then((res) => {
-        setNotes(res.data);
-        setIsLoading(false);
-      })
-      .catch((err) => {
-        console.log(err.message);
-        setIsLoading(false);
-      });
+    loadAllNotes();
   }, []);
 
   const addNote = (data) => {
